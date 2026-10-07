@@ -1,0 +1,13 @@
+flowchart LR
+  U[Class member in browser\nHTML · CSS · JavaScript]
+  REST[JSON REST requests\nAuthorization: Bearer JWT]
+  API[Express API\nvalidation · auth · errors]
+  DB[(SQLite database\nusers · tasks)]
+  WS[Socket.IO server\nJWT handshake]
+  ROOM[Shared classroom room\nClass 04 · Web Tech]
+  EVENTS[Live JSON events\ntask:created · updated · deleted]
+  U --> REST --> API --> DB
+  API -->|persist then emit| WS
+  U <-->|authenticated WebSocket| WS
+  WS --> ROOM --> EVENTS --> U
+  API -->|JSON error response| U
